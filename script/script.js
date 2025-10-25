@@ -41,9 +41,11 @@ table.addEventListener("click", (event) => {
 
     ttt_map[rowIndex][cellIndex] = turn;
 
-    console.log(ttt_map[0]);
-    console.log(ttt_map[1]);
-    console.log(ttt_map[2]);
+    // FOR DEBUGGING
+
+    // console.log(ttt_map[0]);
+    // console.log(ttt_map[1]);
+    // console.log(ttt_map[2]);
 
     if (button.style.backgroundImage) {
         // nothing
