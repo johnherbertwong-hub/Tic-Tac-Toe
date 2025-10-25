@@ -1,19 +1,19 @@
 const table = document.getElementById("game-container");
-const continueBtn = document.getElementById("continue-btn")
+const continueBtn = document.getElementById("continue-btn");
 const aftermath_section = document.getElementById("game-aftermath");
 const main_section = document.getElementById("main-container");
 
-const crossImg = "./assets/cross_white.png"
-const circleImg = "./assets/circle_white.png"
+const crossImg = "./assets/cross_white.png";
+const circleImg = "./assets/circle_white.png";
 
 let ttt_map = [
     [null, null, null],
     [null, null, null],
     [null, null, null]
-]
+];
 
-let turn = "X"
-let gameFinish = false
+let turn = "X";
+let gameFinish = false;
 
 continueBtn.addEventListener("click", () => {
 
@@ -24,7 +24,7 @@ continueBtn.addEventListener("click", () => {
 
     setTimeout(resetDisplay, 200);
     turn = "X";
-    gameFinish = false
+    gameFinish = false;
 });
 
 table.addEventListener("click", (event) => {
@@ -55,16 +55,27 @@ table.addEventListener("click", (event) => {
         turn = "X";
     }
 
-    win_status = checkWin(ttt_map)
+    win_status = checkWin(ttt_map);
 
     if (win_status === null) {
         // do nothing
+    } else if (win_status === "DRAW"){
+        document.getElementById("paragraph-aftermath").innerHTML = `IT'S A DRAW!!!`;
+
+        gameFinish = true;
+
+        ttt_map = ttt_map.map(x => x.map(y => null));
+
+        aftermath_section.style.marginTop = "20px";
+        main_section.style.padding = "50px 0";
+        document.getElementById("game-aftermath").style.height = "130px";
+
     } else {
-        document.getElementById("paragraph-aftermath").innerHTML = `${win_status} WINS!!!`
+        document.getElementById("paragraph-aftermath").innerHTML = `${win_status} WINS!!!`;
 
-        gameFinish = true
+        gameFinish = true;
 
-        ttt_map = ttt_map.map(x => x.map(y => null))
+        ttt_map = ttt_map.map(x => x.map(y => null));
 
         aftermath_section.style.marginTop = "20px";
         main_section.style.padding = "50px 0";
@@ -156,7 +167,7 @@ function checkWin(map) {
 
     shape = null;
     count = 0;
-    index = 2
+    index = 2;
     for (let i = 0; i < map.length; i++) {
         
         if (map[i][index] === null){
@@ -181,7 +192,7 @@ function checkWin(map) {
     }
 
     if (countNotNull == 9) {
-        return "draw";
+        return "DRAW";
     }
 
     return null;
