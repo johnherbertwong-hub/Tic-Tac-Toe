@@ -3,8 +3,8 @@ const continueBtn = document.getElementById("continue-btn")
 const aftermath_section = document.getElementById("game-aftermath");
 const main_section = document.getElementById("main-container");
 
-const crossImg = "/assets/cross_white.png"
-const circleImg = "/assets/circle_white.png"
+const crossImg = "./assets/cross_white.png"
+const circleImg = "./assets/circle_white.png"
 
 let ttt_map = [
     [null, null, null],
