@@ -156,7 +156,7 @@ body {
     
     border: none;
     background-color: transparent;
-    background-image: url('./assets/menu_white.png');
+    background-image: url('/assets/menu_white.png');
     background-repeat: no-repeat ;
     background-size: contain;
 }
