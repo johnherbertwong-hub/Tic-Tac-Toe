@@ -6,6 +6,7 @@
 
 * {
     font-family: "Bitcount Grid Single", system-ui, sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -16,10 +17,185 @@ body {
 
     height: 100vh;
 
+    min-height: 0;
+    overflow: hidden;
+
     background-image: linear-gradient(45deg, hsl(240, 40%, 25%), hsl(300, 30%, 25%));
 }
 
+.menu-container {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    width: 250px;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+    background-color: hsla(300, 19%, 37%, 0.214);
+
+    transition: all 600ms ease-out;
+}
+
+.menu-container h2{
+    margin: 0;
+    padding: 0 0 0 13px;
+
+    text-align: left;
+    text-decoration: underline;
+
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    color: hsl(0, 0%, 95%);
+}
+
+.menu-btn-container {
+    flex: 1 0 60px;
+    max-height: 50px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: right;
+    
+    padding: 9px 9px 9px 0;
+
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: hsl(300, 59%, 13%);
+}
+
+.menu-btn {
+    aspect-ratio: 1/1;
+    
+    height: 100%;
+    
+    border: none;
+    background-color: transparent;
+    background-image: url('/assets/menu_white.png');
+    background-repeat: no-repeat ;
+    background-size: contain;
+}
+
+.menu-choice-container {
+    flex: auto;
+
+    display: flex;
+    flex-direction: column;
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    transition: all 600ms ease-out;
+}
+
+.menu-choice-container::-webkit-scrollbar {
+    background: rgba(86, 86, 86, 0.16);     
+    width: 6px; 
+}
+
+.menu-choice-container::-webkit-scrollbar-thumb {
+    background: rgba(50, 38, 38, 0.658);     
+}
+
+.mode-choice {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.mode-choice p{
+    margin: 0 0 10px 0;
+    padding: 10px 0 0 25px;
+
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    color: hsl(0, 0%, 95%);
+}
+
+.mode-choice a {
+
+    margin: 0 8px 5px;
+    padding: 20px;
+
+    min-height: 50px;
+
+    text-decoration: none;
+
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    border-radius: 20px;
+    color: hsl(0, 0%, 95%);
+    
+    box-shadow: 2px 2px 10px hsl(0, 0%, 9%) inset;
+    transition: all 180ms ease-out;
+}
+
+.mode-choice a:hover {
+    box-shadow: 0px 0px 10px hsla(108, 87%, 41%, 0.6);
+    background-color: hsla(153, 100%, 65%, 0.666);
+}
+
+.mode-choice a:active {
+    transform: scale(0.97);
+}
+
+.advance-choice {
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+}
+
+.advance-choice p{
+    margin: 0 0 10px 0;
+    padding: 10px 0 0 25px;
+
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    color: hsl(0, 0%, 95%);
+}
+
+.advance-choice button {
+    margin: 0 8px 5px;
+    padding: 20px;
+
+    text-decoration: none;
+    min-height: 50px;
+
+    text-align: left;
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+
+    border: none;
+    border-radius: 20px;
+    color: hsl(0, 0%, 95%);
+
+    box-shadow: 2px 2px 10px hsl(0, 0%, 9%) inset;
+    background-color: transparent;
+
+    transition: all 180ms ease-out;
+}
+
+.advance-choice button:hover {
+    box-shadow: 0px 0px 10px hsla(108, 87%, 41%, 0.6);
+    background-color: hsla(153, 100%, 65%, 0.666);
+}
+
+.advance-choice button:active {
+    /* box-shadow: 0px 0px 10px hsla(108, 87%, 41%, 0.6);
+    background-color: hsla(153, 100%, 65%, 0.666); */
+    transform: scale(0.97);
+}
+
 .main-container {
+    box-sizing: content-box;
+
 
     width: 500px;
     height: 500px;
@@ -168,6 +344,24 @@ body {
 
     .btn-aftermath button {
         font-size: 25px;
+    }
+
+    .menu-container {
+
+        max-width: 190px;
+        max-height: 400px;
+    }
+
+    .mode-choice a {
+        padding: 12px 10px;
+        min-height: 10px;
+        font-size: 9px;
+    }
+
+    .advance-choice button {
+        padding: 12px 10px;
+        min-height: 10px;
+        font-size: 9px;
     }
 }
 

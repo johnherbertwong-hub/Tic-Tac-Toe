@@ -2,6 +2,8 @@ const table = document.getElementById("game-container");
 const continueBtn = document.getElementById("continue-btn");
 const aftermath_section = document.getElementById("game-aftermath");
 const main_section = document.getElementById("main-container");
+const menu_btn = document.getElementById('menu-btn');
+
 
 const crossImg = "./assets/cross_white.png";
 const circleImg = "./assets/circle_white.png";
@@ -27,6 +29,30 @@ continueBtn.addEventListener("click", () => {
     gameFinish = false;
 });
 
+let menuShown = true;
+
+menu_btn.addEventListener("click", () => {
+    const menu_selection_section = document.getElementById('menu-choice-container');
+    const menu_section = document.getElementById('menu-container');
+    const menu_btn_section = document.getElementById('menu-btn-container');
+
+
+    if (menuShown == true) {
+        menu_selection_section.style.flex = "0";
+        menu_section.style.width = "50px";
+        menu_section.style.height = "50px";
+        menu_section.style.boxShadow = "3px 3px 10px hsl(0, 0%, 10%)";
+        menuShown = false;
+    } else {
+        menu_selection_section.style.flex = "auto";
+        menu_section.style.width = "250px";
+        menu_section.style.height = "70%";
+        menu_section.style.boxShadow = "none";
+        menuShown = true;
+    }
+    
+});
+
 table.addEventListener("click", (event) => {
 
     const button = event.target.closest("button");
@@ -39,7 +65,7 @@ table.addEventListener("click", (event) => {
     const cellIndex = cell.cellIndex;
     const rowIndex = row.rowIndex;  
 
-    ttt_map[rowIndex][cellIndex] = turn;
+    
 
     // FOR DEBUGGING
 
@@ -47,16 +73,21 @@ table.addEventListener("click", (event) => {
     // console.log(ttt_map[1]);
     // console.log(ttt_map[2]);
 
-    if (button.style.backgroundImage) {
-        // nothing
+    if (button.style.backgroundImage != "") {
+        console.log("Hello")
+        return
     } else if (turn === "X") {
+        ttt_map[rowIndex][cellIndex] = turn;
         button.style.backgroundImage = `url('${crossImg}')`;
         turn = "O";
     } else if (turn === "O") {
+        ttt_map[rowIndex][cellIndex] = turn;
         button.style.backgroundImage = `url('${circleImg}')`;
         turn = "X";
     }
+    console.log("Bye")
 
+    
     win_status = checkWin(ttt_map);
 
     if (win_status === null) {
