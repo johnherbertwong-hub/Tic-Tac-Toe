@@ -464,7 +464,7 @@ body {
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     .main-container {
         width: 300px;
         height: 300px;
@@ -488,6 +488,6 @@ body {
     }
 
     #player1-turn, #player2-turn {
-        bottom: -230px;
+        bottom: -330px;
     }
 }
