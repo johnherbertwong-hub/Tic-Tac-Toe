@@ -3,10 +3,26 @@ const continueBtn = document.getElementById("continue-btn");
 const aftermath_section = document.getElementById("game-aftermath");
 const main_section = document.getElementById("main-container");
 const menu_btn = document.getElementById('menu-btn');
+const swab_shape_btn = document.getElementById('swab-shape-btn');
+const reset_score_btn = document.getElementById('reset-score-btn');
 
+const player1_turn_display = document.getElementById('player1-turn');
+const player2_turn_display = document.getElementById('player2-turn');
+// ADDING HTML OBJECT OF PLAYER 1 INFORMATION
+const player1_status_display = document.getElementById('player1-status');
+const player1_score_display = document.getElementById('player1-score');
 
+// ADDING HTML OBJECT OF PLAYER 2 INFORMATION
+const player2_status_display = document.getElementById('player2-status');
+const player2_score_display = document.getElementById('player2-score');
+
+// ADDING XO IMAGES
 const crossImg = "./assets/cross_white.png";
 const circleImg = "./assets/circle_white.png";
+
+// ADDING PLAYER 1 AND PLAYER 2 OBJECTS
+const player1 = {shape: "X", turn: 1, wins: 0};
+const player2 = {shape: "O", turn: 2, wins: 0};
 
 let ttt_map = [
     [null, null, null],
@@ -14,24 +30,67 @@ let ttt_map = [
     [null, null, null]
 ];
 
-let turn = "X";
+let firstTurn = "Player 1"
+let turn = player1.shape;
 let gameFinish = false;
 
+reset_score_btn.addEventListener("click", () => {
+    if (gameFinish) return;
+
+    player1.wins = 0;
+    player2.wins = 0;
+
+    player1_score_display.innerHTML = player1.wins;
+    player2_score_display.innerHTML = player2.wins;
+
+    ttt_map = ttt_map.map(x => x.map(y => null));
+
+    gameFinish = false;
+    setTimeout(resetDisplay, 50);
+
+    swabPlayerTurnDisplay();
+});
+
+swab_shape_btn.addEventListener("click", () => {
+    if (gameFinish) return;
+
+    ttt_map = ttt_map.map(x => x.map(y => null));
+
+    gameFinish = false;
+    setTimeout(resetDisplay, 50);
+
+    player1.shape = (player1.shape === "X") ? "O" : "X";
+    player2.shape = (player2.shape === "X") ? "O" : "X";
+
+    turn = firstTurn === "Player 1" ? player1.shape : player2.shape;
+
+    swabPlayerTurnDisplay();
+
+    player1_status_display.innerHTML = `P1 (${player1.shape})`;
+    player2_status_display.innerHTML = `P2 (${player2.shape})`;
+});
+
 continueBtn.addEventListener("click", () => {
+    firstTurn = firstTurn === "Player 1" ? "Player 2" : "Player 1";
+    turn = firstTurn === "Player 1" ? player1.shape : player2.shape;
+
+    swabPlayerTurnDisplay();
 
     aftermath_section.style.height = "0";
     aftermath_section.style.marginTop = "0";
 
     main_section.style.padding = "20px 0";
+    gameFinish = false;
 
     setTimeout(resetDisplay, 200);
-    turn = "X";
-    gameFinish = false;
+    
+
 });
 
-let menuShown = true;
+let menuShown = false;
 
 menu_btn.addEventListener("click", () => {
+
     const menu_selection_section = document.getElementById('menu-choice-container');
     const menu_section = document.getElementById('menu-container');
     const menu_btn_section = document.getElementById('menu-btn-container');
@@ -87,8 +146,14 @@ table.addEventListener("click", (event) => {
     }
     console.log("Bye")
 
+    swabPlayerTurnDisplay();
     
     win_status = checkWin(ttt_map);
+
+    if (win_status != null) {
+        player1_turn_display.style.minHeight = "0";
+        player2_turn_display.style.minHeight = "0";
+    }
 
     if (win_status === null) {
         // do nothing
@@ -106,6 +171,14 @@ table.addEventListener("click", (event) => {
     } else {
         document.getElementById("paragraph-aftermath").innerHTML = `${win_status} WINS!!!`;
 
+        if (win_status === player1.shape) {
+            player1.wins ++;
+            player1_score_display.innerHTML = player1.wins;
+        } else {
+            player2.wins ++;
+            player2_score_display.innerHTML = player2.wins;
+        }
+
         gameFinish = true;
 
         ttt_map = ttt_map.map(x => x.map(y => null));
@@ -115,6 +188,23 @@ table.addEventListener("click", (event) => {
         document.getElementById("game-aftermath").style.height = "130px";
     }
 });
+
+function swabTurn() {
+    player1.turn = (player1.turn === 1) ? 2 : 1;
+    player2.turn = (player2.turn === 1) ? 2 : 1;
+}
+
+function swabPlayerTurnDisplay() {
+    let current_turn = (turn === player1.shape) ? "Player 1" : "Player 2";
+
+    if (current_turn === "Player 2") {
+        player1_turn_display.style.minHeight = "0";
+        player2_turn_display.style.minHeight = "420px";
+    } else {
+        player1_turn_display.style.minHeight = "420px";
+        player2_turn_display.style.minHeight = "0";
+    }
+}
 
 function checkWin(map) {
     let shape = null;
@@ -239,3 +329,5 @@ function resetDisplay(){
     });
 
 }
+
+swabPlayerTurnDisplay();

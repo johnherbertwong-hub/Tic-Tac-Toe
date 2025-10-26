@@ -13,6 +13,17 @@
 </head>
 
 <body>
+    <div class="score-container">
+        <div class="player-score">
+            <p id="player1-status">P1 (X)</p>
+            <h2 id="player1-score">0</h2>
+        </div>
+        <div class="player-score">
+            <p id="player2-status">P2 (O)</p>
+            <h2 id="player2-score">0</h2>
+        </div>
+    </div>
+
     <div class="menu-container" id="menu-container">
 
         <div class="menu-btn-container" id="menu-btn-container">
@@ -29,17 +40,18 @@
 
             <div class="advance-choice">
                 <p>OTHER</p>
-                <button>RESET SCORE</button>
-                <button>SWAB X/O</button>
+                <button id="reset-score-btn">RESET SCORE</button>
+                <button id="swab-shape-btn">SWAB X/O</button>
                 <button>LIGHT MODE</button>
             </div>
 
         </div>
 
     </div>
-
+    <h3 id="player1-turn">PLAYER 1 TURN</h3>
+    <h3 id="player2-turn">PLAYER 2 TURN</h3>
     <div class="main-container" id="main-container">
-
+        
         <table class="game-container" id="game-container">
             <tr class="row-container">
                 <td class="cell-container">
